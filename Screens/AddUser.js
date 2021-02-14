@@ -1,29 +1,24 @@
-import React from "react";
+dimport React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
-import { Button, Card } from "react-native-paper";
-import { addNewUser } from "../../Api";
+daimport { Button, Card } from "react-native-paper";
 
 function AddUser({ addUser }) {
   const [value, onChangeText] = React.useState("");
-
-  function _addUser(user) {
-    addNewUser(user).then((res) => {
-      console.log(`User added, ${res}`);
-    });
-  }
 
   function addUserToDb(user) {
     fetch("http://localhost:3000/newUser", {
       method: "post",
       headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
+        Accept: "*/*",
+        "content-type": "Application/Json",
       },
-      body: "data=" + value,
+      body: JSON.stringify({ data: value }),
+      // mode: "no-cors",
     })
       .then((response) => {
         if (response.ok) {
-          alert("the call works ok");
+          // alert("the call works ok");
+          console.log("done");
         }
       })
       .catch(function (error) {
